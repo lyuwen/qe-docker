@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: make image tag
-      run: echo "DOCKER_TAG=$(date \"+%Y%m%d\")" >> ${GITHUB_ENV}
+      run: echo "DOCKER_TAG=$(date +%Y%m%d)" >> ${GITHUB_ENV}
 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag qe-docker:${{ env.DOCKER_TAG }}
