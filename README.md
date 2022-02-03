@@ -3,5 +3,5 @@
 
 
 ```bash
-docker run [--name <contailer name>] [-v <work dir>:/home/tester/workspace] -p 8888:8888 fulvwen/qe-docker
+docker run [--name <contailer name>] [-v <work dir>:/home/tester/workspace] fulvwen/qe-docker
 ```
