@@ -15,14 +15,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    - name: make image tag
+      run: echo "DOCKER_TAG=$(date \"+%Y%m%d\")" >> ${GITHUB_ENV}
+
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag qe-docker:$(date +%s)
+      run: docker build . --file Dockerfile --tag qe-docker:${{ env.DOCKER_TAG }}
       
     - name: name the image latest 
-      run: docker tag qe-docker:$(date +%s) qe-docker:latest
+      run: docker tag qe-docker:${{ env.DOCKER_TAG }} qe-docker:latest
       
     - name: name the image latest 
-      run: docker tag qe-docker:$(date +%s) qe-docker:${{ github.ref_name }}
+      run: docker tag qe-docker:${{ env.DOCKER_TAG }} qe-docker:${{ github.ref_name }}
       if: github.event_name == 'release'
 
     - name: Docker Login
