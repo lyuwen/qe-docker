@@ -41,6 +41,8 @@ jobs:
       with:
         # List of external cache sources for buildx (e.g., user/app:cache, type=local,src=path/to/dir)
         file: ./DockerFile
+        # build for both x86_64 and arm64 architechtures
+        platforms: linux/amd64,linux/arm64
         # List of metadata for an image
         tags: |
           fulvwen/qe-docker:${{ env.DOCKER_TAG }}
