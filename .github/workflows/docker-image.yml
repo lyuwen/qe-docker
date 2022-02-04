@@ -39,8 +39,6 @@ jobs:
       # uses: docker/build-push-action@7f9d37fa544684fb73bfe4835ed7214c255ce02b
       uses: docker/build-push-action@v2.9.0
       with:
-        # List of external cache sources for buildx (e.g., user/app:cache, type=local,src=path/to/dir)
-        file: ./DockerFile
         # List of metadata for an image
         tags: |
           fulvwen/qe-docker:${{ env.DOCKER_TAG }}
