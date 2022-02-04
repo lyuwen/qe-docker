@@ -19,6 +19,10 @@ jobs:
     - name: make image tag
       run: echo "DOCKER_TAG=$(date +%Y%m%d)" >> ${GITHUB_ENV}
 
+    # setup QEMU hypervisor
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+
     # setup Docker buld action
     - name: Set up Docker Buildx
       id: buildx
