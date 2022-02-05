@@ -51,11 +51,12 @@ jobs:
       uses: docker/metadata-action@v3.6.2
       with:
         images: ${{ env.DOCKER_USER }}/${{ env.IMAGE_NAME }}
-
-    - name: test
-      run: |
-        echo tags = ${{ steps.meta.outputs.tags }}
-        echo labels = ${{ steps.meta.outputs.labels }}
+        tags: |
+          type=schedule
+          type=ref,event=branch
+          type=ref,event=tag
+          type=ref,event=pr
+          type=sha
         
     - name: Build and push Docker images
       # You may pin to the exact commit or the version.
