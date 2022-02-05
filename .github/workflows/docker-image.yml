@@ -57,6 +57,8 @@ jobs:
           type=ref,event=tag
           type=ref,event=pr
           type=sha
+        flavor: |
+          latest=auto
         
     - name: Build and push Docker images
       # You may pin to the exact commit or the version.
