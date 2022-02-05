@@ -1,8 +1,8 @@
-name: Docker Image CI
+name: Docker build and push to Docker Hub
 
 on:
-  # schedule:
-  #   - cron: '37 0 * * *'
+  schedule:
+    - cron: '37 0 * * *'
   push:
     branches: [ main ]
   release:
@@ -66,8 +66,6 @@ jobs:
         # build for both x86_64 and arm64 architechtures
         platforms: linux/amd64,linux/arm64
         # List of metadata for an image
-        tags: |
-          fulvwen/qe-docker:${{ env.DOCKER_TAG }}
-          fulvwen/qe-docker:${{ github.ref_name }}
-          fulvwen/qe-docker:latest
-        push: ${{ github.ref == 'refs/heads/main' }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        push: ${{ github.event_name != 'pull_request' }}
