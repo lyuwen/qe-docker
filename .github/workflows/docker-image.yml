@@ -11,7 +11,7 @@ on:
 
 env:
   DOCKER_USER: fulvwen
-  IMAGE_NAME: ${{ env.DOCKER_USER }}/qe-docker
+  IMAGE_NAME: qe-docker
 
 jobs:
 
@@ -50,7 +50,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v3.6.2
       with:
-        images: ${{ env.IMAGE_NAME }}
+        images: ${{ env.DOCKER_USER }}/${{ env.IMAGE_NAME }}
 
     - name: test
       run: |
