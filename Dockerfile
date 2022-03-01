@@ -12,6 +12,7 @@ RUN apt-get update && \
       libscalapack-openmpi-dev \
       openmpi-bin \
       libopenmpi-dev \
+      libgomp1 \
       libfftw3-dev \
       openssl \
       ca-certificates \
@@ -34,7 +35,7 @@ RUN wget --no-check-certificate http://github.com/QEF/q-e/releases/download/qe-7
 
 WORKDIR /home/$NB_USER/qe-7.0
 
-RUN ./configure --with-scalapack --with-hdf5 --with-hdf5-include=/usr/include/hdf5/openmpi && \
+RUN ./configure --enable-openmp --with-scalapack --with-hdf5 --with-hdf5-include=/usr/include/hdf5/openmpi && \
     make pw ph
 
 ENV PATH=/home/$NB_USER/qe-7.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
