@@ -6,8 +6,8 @@ name: Docker build and push to GitHub Packages
 # documentation.
 
 on:
-  schedule:
-    - cron: '37 0 * * *'
+  # schedule:
+  #   - cron: '37 0 * * *'
   push:
     branches: [ main ]
     # Publish semver tags as releases.
