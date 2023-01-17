@@ -25,19 +25,19 @@ ARG NB_UID=1000
 RUN useradd -u $NB_UID -m $NB_USER && \
     echo 'tester ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-USER $NB_USER
-
-WORKDIR /home/$NB_USER
+WORKDIR /opt
 
 RUN wget --no-check-certificate http://github.com/QEF/q-e/releases/download/qe-7.0/qe-7.0-ReleasePack.tgz && \
     tar zxvf qe-7.0-ReleasePack.tgz && rm -f qe-7.0-ReleasePack.tgz
 
-WORKDIR /home/$NB_USER/qe-7.0
+WORKDIR /opt/qe-7.0
 
 RUN ./configure --with-scalapack --with-hdf5 --with-hdf5-include=/usr/include/hdf5/openmpi && \
     make pw ph
 
-ENV PATH=/home/$NB_USER/qe-7.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH=/opt/qe-7.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+USER $NB_USER
 
 RUN mkdir /home/$NB_USER/workspace
 
