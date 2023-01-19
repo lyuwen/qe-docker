@@ -21,12 +21,13 @@ RUN wget --no-check-certificate http://github.com/QEF/q-e/releases/download/qe-7
 WORKDIR /opt/qe-7.0
 
 RUN ./configure --with-scalapack=intel --with-hdf5=/opt/apps/hdf5/intel-1.12.2 \
-    FCFLAGS="-I${MKLROOT}/include/intel64/ilp64 -i8  -I${MKLROOT}/include" \
-    LAPACK_LIBS=${MKLROOT}/lib/intel64/libmkl_lapack95_ilp64.a SCALAPACK_LIBS=${MKLROOT}/lib/intel64/libmkl_scalapack_ilp64.a \
-    BLAS_LIBS="-Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_cdft_core.a ${MKLROOT}/lib/intel64/libmkl_intel_ilp64.a ${MKLROOT}/lib/intel64/libmkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a ${MKLROOT}/lib/intel64/libmkl_blacs_intelmpi_ilp64.a -Wl,--end-group -lpthread -lm -ldl" &&\
+    FCFLAGS="-I${MKLROOT}/include/intel64/lp64 -i8  -I${MKLROOT}/include" \
+    LAPACK_LIBS=${MKLROOT}/lib/intel64/libmkl_lapack95_lp64.a SCALAPACK_LIBS=${MKLROOT}/lib/intel64/libmkl_scalapack_lp64.a \
+    BLAS_LIBS="-Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_cdft_core.a ${MKLROOT}/lib/intel64/libmkl_intel_lp64.a ${MKLROOT}/lib/intel64/libmkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a ${MKLROOT}/lib/intel64/libmkl_blacs_intelmpi_lp64.a -Wl,--end-group -lpthread -lm -ldl" &&\
     make pw ph
 
 
+# FROM fulvwen/intel-mpi-runtime:main
 FROM ghcr.io/lyuwen/intel-mpi-runtime:main
 
 ARG NB_USER=tester
