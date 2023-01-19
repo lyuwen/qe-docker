@@ -5,7 +5,6 @@ on:
   #   - cron: '37 0 * * *'
   push:
     branches:
-      - "main"
       - "intel"
   release:
     types:
@@ -67,8 +66,8 @@ jobs:
       # uses: docker/build-push-action@7f9d37fa544684fb73bfe4835ed7214c255ce02b
       uses: docker/build-push-action@v2.9.0
       with:
-        # build for both x86_64 and arm64 architechtures
-        platforms: linux/amd64,linux/arm64
+        # build for both x86_64 architechtures
+        platforms: linux/amd64
         # List of metadata for an image
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
