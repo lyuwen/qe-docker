@@ -8,10 +8,10 @@ RUN apt-get update && \
       curl \
       gcc gfortran \
       libopenblas-dev \
-      libhdf5-openmpi-dev \
-      libscalapack-openmpi-dev \
-      openmpi-bin \
-      libopenmpi-dev \
+      libhdf5-mpich-dev \
+      libscalapack-mpich-dev \
+      mpich \
+      libmpich-dev \
       libfftw3-dev \
       openssl \
       ca-certificates \
@@ -32,7 +32,7 @@ RUN wget --no-check-certificate http://github.com/QEF/q-e/releases/download/qe-7
 
 WORKDIR /opt/qe-7.0
 
-RUN ./configure --with-scalapack --with-hdf5 --with-hdf5-include=/usr/include/hdf5/openmpi && \
+RUN ./configure --with-scalapack --with-hdf5 --with-hdf5-include=/usr/include/hdf5/mpich && \
     make pw ph
 
 ENV PATH=/opt/qe-7.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
